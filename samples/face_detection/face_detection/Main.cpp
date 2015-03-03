@@ -34,13 +34,19 @@ void camera_work(){
 
     cvNamedWindow( "result", 1 );
 
+	unsigned int count = 0;
+
     if( capture )
     {
         cout << "In capture ..." << endl;
         for(;;)
         {
+			count++;
+			
+			
             IplImage* iplImg = cvQueryFrame( capture );
             frame = iplImg;
+			
             if( frame.empty() )
                 break;
             if( iplImg->origin == IPL_ORIGIN_TL )
@@ -48,13 +54,13 @@ void camera_work(){
             else
                 flip( frame, frameCopy, 0 );
 
-			if(1)
+			if(0)
 			{
 				faceDetector.setSrcImg(frameCopy);
 				faceDetector.doWork();
 				cv::imshow("result", faceDetector.resultMat());
 			}
-			if(0){
+			if(1){
 				faceDetectorCL.setSrcImg(frameCopy, 1);
 				faceDetectorCL.doWork();
 				cv::imshow("result", faceDetectorCL.resultMat());
