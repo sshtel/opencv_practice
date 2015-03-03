@@ -1,12 +1,17 @@
-#include "FaceDetector.h"
+#include "FaceDetector.hpp"
+#include "FaceData.hpp"
 
 FaceDetector::FaceDetector(){
 	
 }
 
-void FaceDetector::setDataPath(std::string path){
+int FaceDetector::load(std::string path){
 	dataPath_ = path;
-	//dataPath_ = "haarcascade_frontalface_default.xml";
+	
+	if(	!face_classifier_.load(this->dataPath_)  ){
+		return -1;
+	}
+	return 0;
 }
 
 void FaceDetector::setSrcImg(cv::Mat &src){
@@ -14,17 +19,22 @@ void FaceDetector::setSrcImg(cv::Mat &src){
 }
 
 
-#define FRONT_FACE_DEFAULT_DATA "..\\..\\..\\opencv\\data\\haarcascades\\haarcascade_frontalface_default.xml"
-//#define FRONT_FACE_DEFAULT_DATA "D:/workspace/opencv_practice/opencv_practice/samples/face_detection/images/haarcascade_frontalface_default.xml"
-
-
-int FaceDetector::cutFace(cv::Mat &dst){
-	setDataPath(FRONT_FACE_DEFAULT_DATA);
-	
-	cv::CascadeClassifier face_classifier;
-	if(	!face_classifier.load(this->dataPath_)  ){
-		return -1;
+int FaceDetector::doWork(){
+	if(dataPath_ == FRONT_FACE_DEFAULT_DATA){
+		return cutFace();
 	}
+	else if(dataPath_ == EYE_DATA){
+		return cutEyes();
+	}
+	else if(dataPath_ == EYE_TREE_EYEGLASSES_DATA){
+		return cutEyes();
+	}
+
+	return -1;
+}
+
+
+int FaceDetector::cutFace(){
 	
 	cv::cvtColor(matSrc_, matGray_, CV_BGR2GRAY);		
 
@@ -33,7 +43,7 @@ int FaceDetector::cutFace(cv::Mat &dst){
 	//this->showImage(matGray_);
 	std::vector<cv::Rect> faces;
 	
-	face_classifier.detectMultiScale(matGray_, faces, 
+	face_classifier_.detectMultiScale(matGray_, faces, 
 		1.1, 
 		3,
 		CV_HAAR_SCALE_IMAGE,
@@ -46,24 +56,12 @@ int FaceDetector::cutFace(cv::Mat &dst){
  
 		cv::rectangle(this->matSrc_, lb, tr, cv::Scalar(0,255,0), 3, 4, 0);
     }
-	
-	this->showImage(this->matSrc_);
-	
+
+	if(faces.size() == 0) return -1;
 	return 0;
 }
 
-#define EYE_DATA "..\\..\\..\\opencv\\data\\haarcascades\\haarcascade_eye.xml"
-#define EYE_TREE_EYEGLASSES_DATA "..\\..\\..\\opencv\\data\\haarcascades\\haarcascade_eye_tree_eyeglasses.xml"
-
-int FaceDetector::cutEyes(cv::Mat &dst){
-	//setDataPath(EYE_DATA);
-	setDataPath(EYE_TREE_EYEGLASSES_DATA);
-	
-	cv::CascadeClassifier face_classifier;
-	if(	!face_classifier.load(this->dataPath_)  ){
-		return -1;
-	}
-	
+int FaceDetector::cutEyes(){
 	
 	cv::cvtColor(matSrc_, matGray_, CV_BGR2GRAY);		
 	
@@ -72,7 +70,7 @@ int FaceDetector::cutEyes(cv::Mat &dst){
 	//this->showImage(matGray_);
 	std::vector<cv::Rect> faces;
 	
-	face_classifier.detectMultiScale(matGray_, faces, 
+	face_classifier_.detectMultiScale(matGray_, faces, 
 		1.1, // must be bigger than 1.0
 		3,
 		CV_HAAR_SCALE_IMAGE,
@@ -86,8 +84,8 @@ int FaceDetector::cutEyes(cv::Mat &dst){
 		cv::rectangle(this->matSrc_, lb, tr, cv::Scalar(0,255,0), 3, 4, 0);
     }
 	
-	this->showImage(this->matSrc_);
-	
+	if(faces.size() == 0) return -1;
+	return 0;
 }
 
 bool FaceDetector::isGray(cv::Mat &src){

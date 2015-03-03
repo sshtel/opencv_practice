@@ -20,10 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FaceDetector.cpp" />
+    <ClCompile Include="FaceDetectorCL.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FaceDetector.h" />
+    <ClInclude Include="FaceData.hpp" />
+    <ClInclude Include="FaceDetector.hpp" />
+    <ClInclude Include="FaceDetectorCL.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{432DF7E4-DD8E-4B3F-805A-16FFE72DD4E5}</ProjectGuid>

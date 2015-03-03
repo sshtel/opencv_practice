@@ -15,15 +15,17 @@ private:
 	std::string dataPath_;
 	
 	bool isGray(cv::Mat &src);
-
+	cv::CascadeClassifier face_classifier_;
 public:
 	FaceDetector();
 
-	void setDataPath(std::string path);
+	int load(std::string path);
 	void setSrcImg(cv::Mat &src);
-	int cutFace(cv::Mat &dst);
-	int cutEyes(cv::Mat &dst);
+	int doWork();
+	int cutFace();
+	int cutEyes();
 
+	cv::Mat& resultMat() { return this->matSrc_; }
 	
 	void showImage(cv::Mat &mat)
 	{

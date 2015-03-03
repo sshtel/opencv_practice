@@ -21,9 +21,18 @@
     <ClCompile Include="FaceDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FaceDetectorCL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FaceDetector.h">
+    <ClInclude Include="FaceDetectorCL.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FaceDetector.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FaceData.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
