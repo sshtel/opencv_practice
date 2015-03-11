@@ -104,9 +104,9 @@ void video_work(bool isGPU){
 	FaceDetectorCL faceDetectorCL;
 	FaceDetectorCL faceDetectorCL2;
 
-	faceDetector.load(FRONT_FACE_DEFAULT_DATA);
-	faceDetectorCL.load(FRONT_FACE_DEFAULT_DATA);
-	faceDetectorCL2.load(FRONT_FACE_DEFAULT_DATA);
+	faceDetector.load(EYE_DATA);
+	faceDetectorCL.load(EYE_DATA);
+	faceDetectorCL2.load(EYE_DATA);
 
 
     int id = -1;
