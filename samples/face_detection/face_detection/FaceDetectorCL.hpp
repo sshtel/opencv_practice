@@ -10,10 +10,8 @@ class FaceDetectorCL{
 
 private:
 	cv::Mat matSrc_;
-	cv::Mat matResult_;
-
+	
 	cv::ocl::oclMat omatSrc_;
-	cv::ocl::oclMat omatDst_;
 	cv::ocl::oclMat omatGray_;
 	
 	std::string dataPath_;
@@ -32,7 +30,7 @@ public:
 	int cutFace();
 	int cutEyes();
 	
-	cv::Mat& resultMat() { return this->matResult_; }
+	cv::Mat& resultMat() { return this->matSrc_; }
 	
 	void showImage(cv::Mat &mat)
 	{

@@ -18,7 +18,6 @@ void FaceDetector::setSrcImg(cv::Mat &src){
 	this->matSrc_ = src;
 }
 
-
 int FaceDetector::doWork(){
 	if(dataPath_ == FRONT_FACE_DEFAULT_DATA){
 		return cutFace();

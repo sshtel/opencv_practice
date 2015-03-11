@@ -8,8 +8,6 @@ class FaceDetector{
 
 private:
 	cv::Mat matSrc_;
-	cv::Mat matDst_;
-
 	cv::Mat matGray_;
 
 	std::string dataPath_;
