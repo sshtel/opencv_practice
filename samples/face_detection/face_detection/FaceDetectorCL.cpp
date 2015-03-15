@@ -3,14 +3,13 @@
 
 using namespace cv;
 
-FaceDetectorCL::FaceDetectorCL(){
-	
+FaceDetectorCL::FaceDetectorCL(std::string name){
+	this->name_ = name;
 }
 
 int FaceDetectorCL::load(std::string path){
 	dataPath_ = path;
 
-	
     if( !cascade_.load( path ))
     {
         std::cout << "ERROR: Could not load classifier cascade: " << path << std::endl;

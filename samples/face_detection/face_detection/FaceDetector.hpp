@@ -6,35 +6,18 @@
 
 class FaceDetector{
 
-private:
-	cv::Mat matSrc_;
-	cv::Mat matGray_;
+protected:
+	//std::string dataPath_;
 
-	std::string dataPath_;
-	
-	bool isGray(cv::Mat &src);
-	cv::CascadeClassifier face_classifier_;
 public:
-	FaceDetector();
+	virtual int load(std::string path) = 0;
+	virtual void setSrcImg(cv::Mat &src, double scale) = 0;
+	virtual int doWork() = 0;
+	virtual int cutFace() = 0;
+	virtual int cutEyes() = 0;
 
-	int load(std::string path);
-	void setSrcImg(cv::Mat &src);
-	int doWork();
-	int cutFace();
-	int cutEyes();
-
-	cv::Mat& resultMat() { return this->matSrc_; }
+	virtual cv::Mat& resultMat() = 0;
 	
-	void showImage(cv::Mat &mat)
-	{
-		cv::Mat img(mat);
-		cv::imshow("show", img);
-		cv::waitKey(0);
-	}
-
-
 };
-
-
 
 #endif

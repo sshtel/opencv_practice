@@ -21,12 +21,16 @@
   <ItemGroup>
     <ClCompile Include="FaceDetector.cpp" />
     <ClCompile Include="FaceDetectorCL.cpp" />
+    <ClCompile Include="FaceDetectorCpu.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="WorkThreadWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FaceData.hpp" />
     <ClInclude Include="FaceDetector.hpp" />
     <ClInclude Include="FaceDetectorCL.hpp" />
+    <ClInclude Include="FaceDetectorCpu.hpp" />
+    <ClInclude Include="WorkThreadWin32.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{432DF7E4-DD8E-4B3F-805A-16FFE72DD4E5}</ProjectGuid>
