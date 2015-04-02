@@ -12,6 +12,10 @@
 using namespace cv;
 using namespace std;
 
+
+#define THREAD_NUM_CPU 8
+#define THREAD_NUM_CL 8
+
 void camera_work(bool isGPU){
 	FaceDetectorCpu faceDetector("face_single_cpu");;
 	FaceDetectorCL faceDetectorCL("face_single_CL");
@@ -106,10 +110,9 @@ void image_work(){
 	
 void video_work_CL(){
 
-	int count = 16;
+	int count = THREAD_NUM_CL;
 	std::vector<FaceDetectorCL> faceDetectorCL;
 
-	
 	for(int i=0; i<count; i++){
 		std::string str = "face";
 		char num[5];
@@ -130,13 +133,10 @@ void video_work_CL(){
 	}
 
 	return;
-	
-
 }
 
-
 void video_work_Cpu(){
-	int count = 16;
+	int count = THREAD_NUM_CPU;
 	std::vector<FaceDetectorCpu> faceDetector;
 	
 	for(int i=0; i<count; i++){
@@ -161,11 +161,55 @@ void video_work_Cpu(){
 }
 
 int main(){
-	bool isGPU = true;
+
+	//cv::ocl::setDevice function (with cv::ocl::getOpenCLPlatforms and cv::ocl::getOpenCLDevices).
+	bool clDeviceFound = false;
+	cv::ocl::PlatformsInfo platformsInfo;
+	cv::ocl::getOpenCLPlatforms(platformsInfo);
+	
+
+	if(0){
+		//find platform and device using PlatformInfo::platformVersion
+		int size = platformsInfo.size();
+		for(int i=0; i<size; i++){
+			const cv::ocl::PlatformInfo *pInfo = platformsInfo.at(i);
+			int pos = pInfo->platformVersion.find("1.1");  //WARNING!  this is not common way to find device. you better choose platform using getOpenCLDevices
+			if(pos >= 0){
+				cv::ocl::setDevice(pInfo->devices.at(0));
+				clDeviceFound = true;
+				break;
+			}
+		}
+	}
+	
+	if(1){
+		//find device using getOpenCLDevices
+		int size = platformsInfo.size();
+		for(int i=0; i<size; i++){
+			const cv::ocl::PlatformInfo *pInfo = platformsInfo.at(i);
+			cv::ocl::DevicesInfo devicesInfo;
+
+			/*
+			CVCL_DEVICE_TYPE_DEFAULT     = (1 << 0),
+            CVCL_DEVICE_TYPE_CPU         = (1 << 1),
+            CVCL_DEVICE_TYPE_GPU         = (1 << 2),
+            CVCL_DEVICE_TYPE_ACCELERATOR = (1 << 3),
+            //CVCL_DEVICE_TYPE_CUSTOM      = (1 << 4)
+            CVCL_DEVICE_TYPE_ALL         = 0xFFFFFFFF
+			*/
+			int ret = cv::ocl::getOpenCLDevices(devicesInfo, cv::ocl::CVCL_DEVICE_TYPE_CPU, pInfo); //get ANY device of that type.
+			if(ret) { 
+				cv::ocl::setDevice(devicesInfo.at(0));
+				clDeviceFound = true;
+				break;
+			}
+		}
+	}
+	
 	//image_work();
 	//camera_work(isGPU);
 	//video_work(isGPU);
-	if(isGPU){ video_work_CL();	}
+	if(clDeviceFound){ video_work_CL();	}
 	else { video_work_Cpu(); }
     
 	return 0;
