@@ -26,6 +26,7 @@
     <ClCompile Include="WorkThreadWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\device_ocl.h" />
     <ClInclude Include="FaceData.hpp" />
     <ClInclude Include="FaceDetector.hpp" />
     <ClInclude Include="FaceDetectorCL.hpp" />
@@ -95,7 +96,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\opencv\include\;..\..\..\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\opencv\include\;..\..\..\opencv\include;..\..\..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

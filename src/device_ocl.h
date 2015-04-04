@@ -16,7 +16,7 @@ public:
 		int size = platformsInfo.size();
 		for(int i=0; i<size; i++){
 			const cv::ocl::PlatformInfo *pInfo = platformsInfo.at(i);
-			int pos = pInfo->platformName.find(platformName);  //WARNING!  this is not common way to find device. you better choose platform using getOpenCLDevices
+			int pos = pInfo->platformName.find(platformName);
 			if(pos >= 0){
 				//platform found!
 				
