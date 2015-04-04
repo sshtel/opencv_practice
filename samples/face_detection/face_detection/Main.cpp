@@ -170,7 +170,7 @@ int main(){
 	
 	std::string platformName = "AMD";
 	//std::string platformName = "Intel";
-	cv::ocl::DeviceType deviceType = cv::ocl::DeviceType::CVCL_DEVICE_TYPE_CPU;
+	cv::ocl::DeviceType deviceType = cv::ocl::DeviceType::CVCL_DEVICE_TYPE_GPU;
 	
 	if(1){
 		clDeviceFound = DeviceOcl::setDevice(platformName.c_str(), deviceType);
