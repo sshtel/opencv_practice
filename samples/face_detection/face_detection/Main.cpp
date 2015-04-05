@@ -168,8 +168,8 @@ int main(){
 	//cv::ocl::setDevice function (with cv::ocl::getOpenCLPlatforms and cv::ocl::getOpenCLDevices).
 	bool clDeviceFound = false;
 	
-	std::string platformName = "AMD";
-	//std::string platformName = "Intel";
+	//std::string platformName = "AMD";
+	std::string platformName = "Intel";
 	cv::ocl::DeviceType deviceType = cv::ocl::DeviceType::CVCL_DEVICE_TYPE_GPU;
 	
 	if(1){

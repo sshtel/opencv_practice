@@ -19,18 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FaceDetector.cpp" />
-    <ClCompile Include="FaceDetectorCL.cpp" />
-    <ClCompile Include="FaceDetectorCpu.cpp" />
+    <ClCompile Include="..\..\..\src\face_detection\FaceDetector.cpp" />
+    <ClCompile Include="..\..\..\src\face_detection\FaceDetectorCL.cpp" />
+    <ClCompile Include="..\..\..\src\face_detection\FaceDetectorCpu.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="WorkThreadWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\device_ocl.h" />
-    <ClInclude Include="FaceData.hpp" />
-    <ClInclude Include="FaceDetector.hpp" />
-    <ClInclude Include="FaceDetectorCL.hpp" />
-    <ClInclude Include="FaceDetectorCpu.hpp" />
+    <ClInclude Include="..\..\..\src\face_detection\FaceData.hpp" />
+    <ClInclude Include="..\..\..\src\face_detection\FaceDetector.hpp" />
+    <ClInclude Include="..\..\..\src\face_detection\FaceDetectorCL.hpp" />
+    <ClInclude Include="..\..\..\src\face_detection\FaceDetectorCpu.hpp" />
     <ClInclude Include="WorkThreadWin32.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -96,7 +96,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\opencv\include\;..\..\..\opencv\include;..\..\..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\opencv\include\;..\..\..\opencv\include;..\..\..\src;..\..\..\src\face_detection;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
