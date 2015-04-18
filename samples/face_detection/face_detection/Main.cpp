@@ -16,8 +16,8 @@ using namespace cv;
 using namespace std;
 
 
-#define THREAD_NUM_CPU 8
-#define THREAD_NUM_CL 8
+#define THREAD_NUM_CPU 12
+#define THREAD_NUM_CL 12
 
 void camera_work(bool isGPU){
 	FaceDetectorCpu faceDetector("face_single_cpu");;
@@ -110,7 +110,7 @@ void image_work(){
 #define VIDEO_720p "..\\images\\720p.mp4"
 #define VIDEO_1080p "..\\images\\1080p.mp4"
 
-	
+
 void video_work_CL(){
 
 	int count = THREAD_NUM_CL;
@@ -168,16 +168,18 @@ int main(){
 	//cv::ocl::setDevice function (with cv::ocl::getOpenCLPlatforms and cv::ocl::getOpenCLDevices).
 	bool clDeviceFound = false;
 	
-	//std::string platformName = "AMD";
-	std::string platformName = "Intel";
+	std::string platformName = "AMD";
+	//std::string platformName = "Intel";
 	cv::ocl::DeviceType deviceType = cv::ocl::DeviceType::CVCL_DEVICE_TYPE_GPU;
 	
-	if(1){
-		clDeviceFound = DeviceOcl::setDevice(platformName.c_str(), deviceType);
+	DeviceOcl devOcl;
+	
+	if(0){
+		clDeviceFound = devOcl.setDevice(platformName.c_str(), deviceType);
 	}
 	
 	if(0){
-		clDeviceFound = DeviceOcl::setDeviceFromAnyPlatform(deviceType);
+		clDeviceFound = devOcl.setDeviceFromAnyPlatform(deviceType);
 	}
 	
 	//image_work();

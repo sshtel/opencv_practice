@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\..\src\face_detection\FaceDetectorCpu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\device_ocl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WorkThreadWin32.hpp">
